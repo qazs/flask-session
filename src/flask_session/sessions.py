@@ -446,7 +446,7 @@ class MongoDBSessionInterface(SessionInterface):
         self.store.update_one({'id': store_id}, { "$set": {
             'val': val,
             'expiration': expires}
-        })
+        }, upsert=True)
         if self.use_signer:
             session_id = self._get_signer(app).sign(want_bytes(session.sid))
         else:
